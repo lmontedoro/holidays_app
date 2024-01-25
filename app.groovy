@@ -1,5 +1,5 @@
 /**
- * Holidays app for Hubitat
+ * Holidays App
  *
  * Copyright (c) 2024 Leandro Montedoro
  *
@@ -29,11 +29,12 @@ preferences {
             paragraph "Make sure to create two <b>Boolean</b> Hub variables in <b>Settings -> Hub Variables</b>"
             paragraph "<ul><li>IsHoliday "+ printVar("IsHoliday") + "</li><li>IsHolidayTomorrow " + printVar("IsHolidayTomorrow") +"</li></ul>"
             paragraph "<i>After creation, the application will initialize these two variables as 'true' or 'false' according to the provided list of dates, allowing you to incorporate them into your rules and automation processes.</i>"
+            paragraph "<a href='https://github.com/lmontedoro/holidays_app/tree/main' target='_blank'>Read More</a>"
         }
         section {
             input name: "inputDateList", type: "text", title: "<b>Enter Holidays (mm/dd) separated by comma:</b>", defaultValue: "1/1, 1/16, 5/29, 7/4, 9/4, 11/23, 11/24, 12/25", submitOnChange: true
             
-        }        
+        }
     }
 }
 
