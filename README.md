@@ -55,7 +55,7 @@ It should looks like this:
 
 ![Variables](screenshots/image4.jpg)
 
-## Usage
+# Usage
 
 Once in the app verify the two variables are in `OK` state. This means they've been created with the right name and type.
 
@@ -72,3 +72,11 @@ Example:
 Finally click `Done`
 
 Every morning at (12:01) the app will run, and set up those two variables either true or false.
+
+## Scheduler Validation
+
+To validate the app is scheduled properly:
+
+![Variables](screenshots/image6.jpg)
+
+It should be scheduled to run every day at 12:01 AM

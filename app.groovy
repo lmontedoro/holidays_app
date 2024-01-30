@@ -1,5 +1,5 @@
-/**
- * Holidays App
+/*
+ * Holidays app for Hubitat
  *
  * Copyright (c) 2024 Leandro Montedoro
  *
@@ -40,7 +40,7 @@ preferences {
 
 // Called when app first installed
 def installed() {
-    //log.trace "Holidays App was installed"
+    log.trace "Holidays App was installed"
 }
 
 // Called when user presses "Done" button in app
@@ -52,7 +52,7 @@ def updated() {
 def uninstalled() {
    removeAllInUseGlobalVar()
    unschedule(newDayHandler) 
-   //log.trace "Holidays App was uninstalled"
+   log.trace "Holidays App was uninstalled"
 }
 
 // Set Variables & Cron
@@ -62,13 +62,14 @@ void initialize() {
     addInUseGlobalVar("IsHolidayTomorrow") 
     
     newDayHandler()
+    log.trace "Setting Scheduler"
     schedule("0 1 0 * * ?", newDayHandler);   
 }
 
 def printVar(varName) {
     def hubVar = getGlobalVar(varName)
     if (hubVar != null && hubVar.type == "boolean") {
-        return "<span style='color:green'>OK</span>"
+        return "<span style='color:green'>OK</span> ["+hubVar.value+"]"
     } else {
         return "<span style='color:red'>NOT SET</span>"
     }
