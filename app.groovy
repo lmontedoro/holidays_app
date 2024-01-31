@@ -27,13 +27,13 @@ preferences {
     page(name: "mainPage", title: "Holidays Tracker", install: true, uninstall: true) {
         section {
             paragraph "Make sure to create two <b>Boolean</b> Hub variables in <b>Settings -> Hub Variables</b>"
-            paragraph "<ul><li>IsHoliday "+ printVar("IsHoliday") + "</li><li>IsHolidayTomorrow " + printVar("IsHolidayTomorrow") +"</li></ul>"
+            paragraph "<ul><li>IsHoliday ${printVar("IsHoliday")}</li><li>IsHolidayTomorrow ${printVar("IsHolidayTomorrow")}</li></ul>"
             paragraph "<i>After creation, the application will initialize these two variables as 'true' or 'false' according to the provided list of dates, allowing you to incorporate them into your rules and automation processes.</i>"
             paragraph "<a href='https://github.com/lmontedoro/holidays_app/tree/main' target='_blank'>Read More</a>"
         }
         section {
             input name: "inputDateList", type: "text", title: "<b>Enter Holidays (mm/dd) separated by comma:</b>", defaultValue: "1/1, 1/16, 5/29, 7/4, 9/4, 11/23, 11/24, 12/25", submitOnChange: true
-            
+            if(inputDateList) paragraph "${validateInput(inputDateList)}"
         }
     }
 }
@@ -69,10 +69,25 @@ void initialize() {
 def printVar(varName) {
     def hubVar = getGlobalVar(varName)
     if (hubVar != null && hubVar.type == "boolean") {
-        return "<span style='color:green'>OK</span> ["+hubVar.value+"]"
+        if (hubVar.value == true) {
+            return "<span style='color:green'> TRUE</span>"
+        } else {
+            return "<span style='color:orange'> FALSE</span>"
+        }
+        
     } else {
-        return "<span style='color:red'>NOT SET</span>"
+        return "<span style='color:red'> NOT SET!</span>"
     }
+}
+
+def validateInput(userInput) {
+    def pattern = /\d{1,2}\/\d{1,2}(, ?\d{1,2}\/\d{1,2})*$/
+    
+    if (userInput =~ pattern) {
+        return ""
+    } else {
+        return "<span style='color:red'>The string does not contain a valid sequence of 'mm/dd' separated by commas.</span>"
+    }    
 }
 
 def newDayHandler() {
