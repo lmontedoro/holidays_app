@@ -32,7 +32,7 @@ preferences {
             paragraph "<a href='https://github.com/lmontedoro/holidays_app/tree/main' target='_blank'>Read More</a>"
         }
         section {
-            input name: "inputDateList", type: "text", title: "<b>Enter Holidays (mm/dd) separated by comma:</b>", defaultValue: "1/1, 1/16, 5/29, 7/4, 9/4, 11/23, 11/24, 12/25", submitOnChange: true
+            input name: "inputDateList", type: "text", title: "<b>Enter Holidays (mm/dd) separated by comma:</b>", defaultValue: "1/1, 1/15, 5/27, 7/4, 9/2, 10/14, 11/28, 12/25", submitOnChange: true
             if(inputDateList) paragraph "${validateInput(inputDateList)}"
         }
     }
